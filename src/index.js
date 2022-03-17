@@ -19,6 +19,8 @@ app.use(bodyparser.json());
 app.use(cors({origen: '*'}));
 
 
+const tareasRouter = require('./routes/tareas');
+
 //primeros secundaria
 
 app.use('/primeroasec',require('./routes/secundaria/primeros/PrimeroasecRoutes'))
@@ -46,6 +48,7 @@ app.use('/sextoasec',require('./routes/secundaria/sextos/SextoasecRoutes'))
 
 
 
+app.use('/tareas', tareasRouter)
 
 app.listen(app.get('Port'),()=>{
     console.log('Servidor escuchando por el puerto',app.get('Port'))
