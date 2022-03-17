@@ -6,7 +6,7 @@ const Tareas = require("../models/tareas");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-  cb(null, "../client/public/uploads")
+  cb(null, "./uploads")
 },
 filename: (req, file, cb) => {
   cb(null, file.originalname )
