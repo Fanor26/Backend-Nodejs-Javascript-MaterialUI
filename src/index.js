@@ -20,6 +20,7 @@ app.use(cors({origen: '*'}));
 
 
 const tareasRouter = require('./routes/tareas');
+app.use('/tareas', tareasRouter)
 
 //primeros secundaria
 
@@ -47,8 +48,8 @@ app.use('/quintoasec',require('./routes/secundaria/quintos/QuintoasecRoutes'))
 app.use('/sextoasec',require('./routes/secundaria/sextos/SextoasecRoutes'))
 
 
+app.use('/public', express.static('public'));
 
-app.use('/tareas', tareasRouter)
 
 app.listen(app.get('Port'),()=>{
     console.log('Servidor escuchando por el puerto',app.get('Port'))
