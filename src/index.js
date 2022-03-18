@@ -5,11 +5,13 @@
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
+const dotenv = require("dotenv");
 const cors = require('cors')
 const bodyparser = require('body-parser')
 require('./database')
 
 
+dotenv.config();
 //Configuracion del puerto
 
 app.set('Port',process.env.PORT || 4000);
@@ -49,7 +51,7 @@ app.use('/sextoasec',require('./routes/secundaria/sextos/SextoasecRoutes'))
 
 
 app.use('/public', express.static('public'));
-
+app.use("/user", require("./routes/user"));
 
 app.listen(app.get('Port'),()=>{
     console.log('Servidor escuchando por el puerto',app.get('Port'))
