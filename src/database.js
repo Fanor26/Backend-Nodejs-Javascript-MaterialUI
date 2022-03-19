@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose')
 
-URI ='mongodb+srv://fanor2030:fanor2030@cluster0.3gqcv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+URI ='mongodb+srv://fanor2030:fanor2030@cluster0.3gqcv.mongodb.net/IMAGENESASISTENCIA?retryWrites=true&w=majority'
 
 
 
