@@ -5,7 +5,7 @@
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
-const dotenv = require("dotenv");
+const dotenv = require('dotenv'); 
 const cors = require('cors')
 const bodyparser = require('body-parser')
 require('./database')
@@ -14,15 +14,13 @@ require('./database')
 dotenv.config();
 //Configuracion del puerto
 
-app.set('Port',process.env.PORT || 4000);
+app.set('Port',process.env.PORT || 5000);
 app.use(morgan('dev'));
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(bodyparser.json());
 app.use(cors({origen: '*'}));
 
 
-const tareasRouter = require('./routes/tareas');
-app.use('/tareas', tareasRouter)
 
 //primeros secundaria
 
@@ -51,7 +49,18 @@ app.use('/sextoasec',require('./routes/secundaria/sextos/SextoasecRoutes'))
 
 
 app.use('/public', express.static('public'));
+
 app.use("/user", require("./routes/user"));
+app.use("/asistencia", require("./routes/AsistenciaRoutes"));
+
+app.use("/practica", require("./routes/PracticaRoutes"));
+
+/*
+app.use("/curso", require("./routes/CursoRoutes"));*/
+const tareasRouter = require('./routes/tareas');
+app.use('/tareas', tareasRouter)
+
+
 
 app.listen(app.get('Port'),()=>{
     console.log('Servidor escuchando por el puerto',app.get('Port'))

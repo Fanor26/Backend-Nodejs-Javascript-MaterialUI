@@ -6,6 +6,8 @@ segundonombre:String,
 tercernombre:String,
 apellidopaterno:String,
 apellidomaterno:String,
+
+
 correomovil:String, 
 contrasena: String, 
 date:{type:Date,default:Date.now} 

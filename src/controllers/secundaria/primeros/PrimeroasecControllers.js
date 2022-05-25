@@ -14,6 +14,8 @@ const NuevoPrimeroasec = new Primeroasec({
     tercernombre,
     apellidopaterno,
     apellidomaterno,
+   
+   
     correomovil, 
     contrasena, 
 }) 
@@ -35,11 +37,63 @@ else {
     id: NuevoPrimeroasec._id, 
     primernombre: NuevoPrimeroasec.primernombre,
     segundonombre: NuevoPrimeroasec.segundonombre,
-    tercernombre: NuevoPrimeroasec.tercernombre, 
+    tercernombre: NuevoPrimeroasec.tercernombre,
+    apellidopaterno: NuevoPrimeroasec.apellidopaterno,
+    apellidomaterno: NuevoPrimeroasec.apellidomaterno,
     token,
       }) 
     } 
 }
+
+PrimeroasecsCtrl.listar = async(req,res)=>{
+
+    const respuesta = await Primeroasec.find()
+    res.json(respuesta)
+
+
+}/*
+PrimeroasecsCtrl.listarId = async(req,res)=>{
+    const id= req.params.id
+
+    const respuesta = await Primeroasec.findById({_id:id})
+    res.json(respuesta)
+
+
+}
+*/
+PrimeroasecsCtrl.estudiantesDeunCurso = async(req,res)=>{
+    const id= req.params.id
+
+    const respuesta = await Primeroasec.find({curso:id})
+    res.json(respuesta)
+   
+
+}
+
+
+PrimeroasecsCtrl.eliminar = async(req,res)=>{
+    const id= req.params.id
+
+     await Primeroasec.findByIdAndRemove({_id:id})
+     res.json({
+
+        mensaje:'Estudiante eliminado'
+
+
+     })
+    }
+
+    PrimeroasecsCtrl.actualizar= async(req,res)=>{
+        const id= req.params.id
+    
+         await Primeroasec.findByIdAndUpdate({_id:id}, req.body)
+         res.json({
+    
+            mensaje:'Estudiante actualizado'
+    
+    
+         })
+        }
 
 
 PrimeroasecsCtrl.login= async(req,res)=> {
@@ -61,7 +115,10 @@ if(!primeroasec)
              mensaje: 'Bienvenido',
               id: primeroasec.id,
               primernombre: primeroasec.primernombre,
-    
+              segundonombre: primeroasec.segundonombre,
+              tercernombre: primeroasec.tercernombre,
+              apellidopaterno: primeroasec.apellidopaterno,
+              apellidomaterno:primeroasec.apellidomaterno,
 
               token
 })

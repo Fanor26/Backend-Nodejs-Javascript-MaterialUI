@@ -2,7 +2,7 @@ const router = require("express").Router();
 const cloudinary = require("../utils/cloudinary");
 const upload = require("../utils/multer");
 const User = require("../models/user");
-
+const Auth = require('../helper/Auth')
 router.post("/", upload.single("image"), async (req, res) => {
   try {
     // Upload image to cloudinary
@@ -10,6 +10,9 @@ router.post("/", upload.single("image"), async (req, res) => {
 
     // Create new user
     let user = new User({
+      autor: req.body.autor,
+      curso: req.body.curso,
+      ciudadNombre: req.body.ciudadNombre,
       name: req.body.name,
       avatar: result.secure_url,
       cloudinary_id: result.public_id,
@@ -56,6 +59,9 @@ router.put("/:id", upload.single("image"), async (req, res) => {
       result = await cloudinary.uploader.upload(req.file.path);
     }
     const data = {
+      autor: req.body.autor || user.autor,
+      curso: req.body.curso || user.curso,
+      ciudadNombre: req.body.ciudadNombre || user.ciudadNombre,
       name: req.body.name || user.name,
       avatar: result?.secure_url || user.avatar,
       cloudinary_id: result?.public_id || user.cloudinary_id,
@@ -76,5 +82,20 @@ router.get("/:id", async (req, res) => {
     console.log(err);
   }
 });
+
+
+router.get("/listarUsersCurso/:id", async (req, res) => {
+  try{
+
+  
+  const id = req.params.id;
+
+  const user = await User.find({ curso: id });
+  res.json(user);
+} catch (err) {
+  console.log(err);
+}
+});
+
 
 module.exports = router;

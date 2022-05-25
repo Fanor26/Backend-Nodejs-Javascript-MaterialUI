@@ -35,7 +35,9 @@ else {
     id: NuevoCuartooasec._id, 
     primernombre: NuevoCuartooasec.primernombre,
     segundonombre: NuevoCuartooasec.segundonombre,
-    tercernombre: NuevoCuartooasec.tercernombre, 
+    tercernombre: NuevoCuartooasec.tercernombre,
+    apellidopaterno: NuevoCuartooasec.apellidopaterno,
+    apellidomaterno: NuevoCuartooasec.apellidomaterno,
     token,
       }) 
     } 
@@ -61,6 +63,10 @@ if(!cuartooasec)
              mensaje: 'Bienvenido',
               id: cuartooasec.id,
               primernombre: cuartooasec.primernombre,
+              segundonombre: cuartooasec.segundonombre,
+              tercernombre: cuartooasec.tercernombre,
+              apellidopaterno: cuartooasec.apellidopaterno,
+              apellidomaterno: cuartooasec.apellidomaterno,
     
 
               token
