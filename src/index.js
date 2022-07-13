@@ -57,10 +57,11 @@ app.use("/practica", require("./routes/PracticaRoutes"));
 
 /*
 app.use("/curso", require("./routes/CursoRoutes"));*/
-const tareasRouter = require('./routes/tareas');
-app.use('/tareas', tareasRouter)
 
 
+//register
+const serverRouter= require('./routes/server/index');
+app.use('/server', serverRouter)
 
 app.listen(app.get('Port'),()=>{
     console.log('Servidor escuchando por el puerto',app.get('Port'))

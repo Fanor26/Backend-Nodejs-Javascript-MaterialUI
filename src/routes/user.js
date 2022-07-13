@@ -97,5 +97,34 @@ router.get("/listarUsersCurso/:id", async (req, res) => {
 }
 });
 
+router.post('/autenthication/register', async(req, res) => {
+  const { body } = req;
+  if (Object.keys(body).length == 0) {
+    res.status(300).json({ msn: 'Error: No se han enviado parametros para la autenticacion '})
+    return;
+  }
+  const {email, password} = body;
+  if (email == null) {
+    res.status(300).json({ msn: 'Es necesario un email para continuar con el registro'});
+    return;
+  }
+  if (password == null) {
+    res.status(300).json({ msn: 'Es necesario un password para continuar con el registro'});
+    return;
+  }
+  const cypherPassword = md5(password);
+  USER.findOne({ email }).then(( user ) => {
+    if (user) {
+      res.status(300).json( {msn: `El email ${email} ya se encuentra registrado`});
+      return;
+    }
+    const newUser = new USER({
+      email,
+      password: cypherPassword
+    });
+    newUser.save();
+    res.status(200).json({msn: `Usuario registrado con exito`, newUser});
+  });
+});
 
 module.exports = router;
